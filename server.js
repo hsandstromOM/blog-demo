@@ -12,8 +12,8 @@ var auth =  require('./config.json');
 var app = express();
 
 // include client-side assets and use the bodyParser
-app.use(express.static(__dirname + '/assets'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('/assets'));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Listen for an application request on designated port
@@ -24,32 +24,26 @@ var server = app.listen(app.get('port'), function() {
 	console.info('Magic happens on port 5000');
 });
 
-// log requests to stdout and also
-// log HTTP requests to a file in combined format
-// var accessLogStream = fs.createWriteStream(__dirname + '/access.log', { flags: 'a' });
-// app.use(logger('dev'));
-// app.use(logger('combined', { stream: accessLogStream }));
-
 // http GET default page at /
-app.get("/", function (request, response) {
-  response.sendFile('/index.html');
+app.get('/', function (req, res) {
+  return res.send('/index.html');
 });
 // 404 for page not found requests
-app.get(function (request, response) {
-  response.sendFile('/404.html');
+app.get(function (req, res) {
+  return res.send('/404.html');
 });
 
 // http GET /about
-app.get("/about", function (request, response) {
-  response.sendFile('/about.html');
+app.get('/about', function (req, res) {
+  return res.send('/about.html');
 });
 
 // http GET /about
-app.get("/post", function (request, response) {
-  response.sendFile('/post.html');
+app.get('/post', function (req, res) {
+  return res.send('/post.html');
 });
 
 // http GET /contact
-app.get("/contact", function (req, res) {
-  res.sendFile('/contact.html');
+app.get('/contact', function (req, res) {
+  return res.send('/contact.html');
 });
