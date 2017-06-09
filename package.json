@@ -13,10 +13,10 @@
     "url": "https://github.com/hsandstromOM/blog-demo.git"
   },
   "dependencies": {
-    "nconf": "^0.8.4",
     "body-parser": "^1.16.0",
     "bootstrap": "^3.3.7",
     "browser-sync": "^2.13.0",
+    "dotenv": "^4.0.0",
     "express": "^4.5.1",
     "font-awesome": "^4.6.3",
     "gulp": "^3.9.1",
@@ -27,8 +27,10 @@
     "gulp-uglify": "^1.5.4",
     "jquery": "^1.11.3",
     "morgan": "^1.7.0",
+    "nconf": "^0.8.4",
     "nodemailer": "^2.4.2",
     "nodemailer-mailgun-transport": "^1.2.2",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "superagent": "^3.5.2"
   }
 }

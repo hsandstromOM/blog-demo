@@ -1,22 +1,14 @@
-var path = require("path");
-var express = require("express");
-var fs = require('fs')
-var logger = require("morgan");
-var nodemailer = require('nodemailer');
-var mg = require('nodemailer-mailgun-transport');
+//Adapted from https://www.codementor.io/mattgoldspink/integrate-mailchimp-with-nodejs-app-du10854xp
+
+var express = require('express');
 var bodyParser = require('body-parser');
-var nconf = require('nconf');
-var auth =  require('./config.json');
-
-// make a request app and create the server
 var app = express();
-
-// include client-side assets and use the bodyParser
-app.use(express.static('/assets'));
-app.use(bodyParser.urlencoded({ extended: true }));
+var request = require('superagent');
+require('dotenv').config();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static('assets'));
 
-// Listen for an application request on designated port
 app.set('port', process.env.PORT || 5000);
 
 var server = app.listen(app.get('port'), function() {
@@ -24,26 +16,29 @@ var server = app.listen(app.get('port'), function() {
 	console.info('Magic happens on port 5000');
 });
 
-// http GET default page at /
 app.get('/', function (req, res) {
-  return res.send('/index.html');
-});
-// 404 for page not found requests
-app.get(function (req, res) {
-  return res.send('/404.html');
+  res.send('/index.html');
 });
 
-// http GET /about
-app.get('/about', function (req, res) {
-  return res.send('/about.html');
-});
-
-// http GET /about
-app.get('/post', function (req, res) {
-  return res.send('/post.html');
-});
-
-// http GET /contact
-app.get('/contact', function (req, res) {
-  return res.send('/contact.html');
+app.post('/signup', function (req, res) {
+    request
+        .post('https://' + process.env.DB_mailchimpInstance + '.api.mailchimp.com/3.0/lists/' + process.env.DB_listUniqueId + '/members/')
+        .set('Content-Type', 'application/json;charset=utf-8')
+        .set('Authorization', 'Basic ' + new Buffer('any:' + process.env.DB_mailchimpApiKey ).toString('base64'))
+        .send({
+          'email_address': req.body.email,
+          'status': 'subscribed',
+          'merge_fields': {
+            'FNAME': req.body.firstName,
+            'LNAME': req.body.lastName,
+            'MESSAGE': req.body.message
+          }
+        })
+            .end(function(err, response) {
+              if (response.status < 300 || (response.status === 400 && response.body.title === "Member Exists")) {
+                return res.redirect('/thankyou.html');
+              } else {
+                res.send('Sign Up Failed :(');
+              }
+          });
 });
