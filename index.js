@@ -10,7 +10,6 @@ var auth =  require('./config.json');
 
 // make a request app and create the server
 var app = express();
-var server = require('http').createServer(app);
 
 // include client-side assets and use the bodyParser
 app.use(express.static(__dirname + '/assets'));
