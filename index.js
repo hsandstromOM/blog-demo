@@ -7,7 +7,6 @@ var mg = require('nodemailer-mailgun-transport');
 var bodyParser = require('body-parser');
 var nconf = require('nconf');
 var auth =  require('./config.json');
-const port = process.env.PORT || 8081;
 
 // make a request app and create the server
 var app = express();
