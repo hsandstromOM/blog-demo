@@ -20,6 +20,18 @@ app.get('/', function (req, res) {
   res.send('/index.html');
 });
 
+app.get('/about', function (req, res) {
+  res.send('/about.html');
+});
+
+app.get('/contact', function (req, res) {
+  res.send('/contact.html');
+});
+
+app.get('/post', function (req, res) {
+  res.send('/post.html');
+});
+
 app.post('/signup', function (req, res) {
     request
         .post('https://' + process.env.DB_mailchimpInstance + '.api.mailchimp.com/3.0/lists/' + process.env.DB_listUniqueId + '/members/')
