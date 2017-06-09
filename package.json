@@ -1,23 +1,21 @@
 {
   "name": "clean-blog",
   "title": "Clean Blog",
-  "version": "3.3.7+1",
-  "main": "index.js",
-  "homepage": "http://startbootstrap.com/template-overviews/clean-blog",
+  "main": "server.js",
+  "homepage": "",
   "author": "Start Bootstrap",
   "license": {
-    "type": "MIT",
-    "url": "https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE"
+    "type": "MIT"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "dev": "nodemon"
   },
   "devDependencies": {
-    "body-parser": "latest",
+    "body-parser": "^1.16.0",
     "bootstrap": "^3.3.7",
     "browser-sync": "^2.13.0",
-    "express": "latest",
+    "express": "^4.5.1",
     "font-awesome": "^4.6.3",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^2.0.10",
@@ -26,14 +24,16 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.4",
     "jquery": "^1.11.3",
-    "morgan": "latest",
-    "nconf": "latest",
-    "nodemailer": "latest",
-    "nodemailer-mailgun-transport": "latest",
+    "morgan": "^1.7.0",
+    "nodemailer": "^2.4.2",
+    "nodemailer-mailgun-transport": "^1.2.2",
     "nodemon": "^1.11.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BlackrockDigital/startbootstrap-clean-blog.git"
+    "url": "https://github.com/hsandstromOM/blog-demo.git"
+  },
+  "dependencies": {
+    "nconf": "^0.8.4"
   }
 }

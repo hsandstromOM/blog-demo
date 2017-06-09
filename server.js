@@ -23,25 +23,27 @@ app.use(logger('dev'));
 app.use(logger('combined', { stream: accessLogStream }));
 
 // http GET default page at /
-
-app.get('/', function (req, res) {
-  res.send('index.html')
+app.get("/", function (request, response) {
+  response.sendFile('/assets/index.html');
+});
+// 404 for page not found requests
+app.get(function (request, response) {
+  response.sendFile('/assets/404.html');
 });
 
-app.get(function (req, res) {
-  res.send('404.html')
+// http GET /about
+app.get("/about", function (request, response) {
+  response.sendFile('/assets/about.html');
 });
 
-app.get('/about', function (req, res) {
-  res.send('about.html')
+// http GET /about
+app.get("/post", function (request, response) {
+  response.sendFile('/assets/post.html');
 });
 
-app.get('/post', function (req, res) {
-  res.send('post.html')
-});
-
-app.get('/contact', function (req, res) {
-  res.send('contact.html')
+// http GET /contact
+app.get("/contact", function (req, res) {
+  res.sendFile('/assets/contact.html');
 });
 
 // Listen for an application request on designated port
