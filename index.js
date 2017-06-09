@@ -49,45 +49,10 @@ app.get("/contact", function (req, res) {
   res.sendFile(path.join(__dirname + '/assets/contact.html'));
 });
 
-// http POST /contact
-// app.post("/contact", function (req, res) {
-//   var name = req.body.inputname;
-//   var email = req.body.inputemail;
-//   var company = req.body.inputcompany;
-//   var comment = req.body.inputcomment;
-//   var isError = false;
-//
-//   if (company) {
-//     isError = true;
-//   }
-//   console.log('\nCONTACT FORM DATA: '+ name + ' '+email + ' '+ comment+'\n');
-//
-//   // create transporter object capable of sending email using the default SMTP transport
-//   var transporter = nodemailer.createTransport(mg(auth));
-//
-//   // setup e-mail data with unicode symbols
-//   var mailOptions = {
-//     from: '"This guy" <hoseasandstrom@gmail.com>', // sender address
-//     to: 'hosea@obviouslee.com', // list of receivers
-//     subject: 'Message from Website Contact page', // Subject line
-//     text: comment,
-//     text: company,
-//     err: isError
-//
-//   };
-//   // send mail with defined transport object
-//   transporter.sendMail(mailOptions, function (error, info) {
-//     if (error) {
-//       console.log('\nERROR: ' + error+'\n');
-//         res.redirect('/404.html');
-//     } else {
-//          console.log('\nRESPONSE SENT: ' + info.response+'\n');
-//         res.redirect('/thankyou.html');
-//     }
-//   });
-// });
-
 // Listen for an application request on designated port
-server.listen(port, function () {
- console.log('Web app started and listening on http://localhost:' + port);
+app.set('port', process.env.PORT || 5000);
+
+var server = app.listen(app.get('port'), function() {
+	var port = server.address().port;
+	console.info('Magic happens on port 5000');
 });
